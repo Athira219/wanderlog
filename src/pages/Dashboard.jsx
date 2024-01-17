@@ -48,7 +48,7 @@ function Dashboard() {
 
       <div className='shadow p-5 container rounded mt-5 w-100 bg-white text-dark'>
         <div className='d-flex align-items-center justify-content-center '>
-          <h3 >Add your Post</h3>
+          
           <CreateWanderlog />
         </div>
         <div className='bg-dark mt-5 container-fluid  rounded shadow' >

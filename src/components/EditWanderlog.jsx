@@ -9,7 +9,10 @@ import { updateWanderApi } from '../service/allApi';
 import { baseUrl } from '../service/baseUrl';
 import { updatewanderlogContext } from '../context/ContextWanderlog';
 
+
 function EditWanderlog({ wanderlogs }) {
+
+    
 
     const { updateWanderrlog, setUpdateWanderlog } = useContext(updatewanderlogContext)
 
@@ -58,6 +61,7 @@ function EditWanderlog({ wanderlogs }) {
 
     const updateWanderlog = async (e) => {
         e.preventDefault()
+        
 
         const id = wanderlogs._id
         console.log('id=', id);
@@ -66,6 +70,7 @@ function EditWanderlog({ wanderlogs }) {
 
         if (!place || !date || !wanderlog || !wanderlogImage) {
             toast.info('Fill the Form')
+            
         } else {
 
             const body = new FormData()
@@ -91,11 +96,13 @@ function EditWanderlog({ wanderlogs }) {
                     toast.success(`${editWanderResult.data.place} Updated Successfully`)
 
                     handleClose()
+                    
 
                 } else {
                     toast.error('Try again')
                     console.log(editWanderResult.response.data);
                     handleClose()
+                    
                 }
             } else {
                 const header = {
@@ -126,41 +133,44 @@ function EditWanderlog({ wanderlogs }) {
         }
     }
     return (
-        <div>
+        <>
             {/* <button className='btn btn-dark ms-3' ><i class="fa-solid fa-plus "></i></button> */}
-            <Button variant="success" onClick={handleShow} className='text-light rounded' ><i class="fa-solid fa-pen-to-square"></i></Button>
-            <Modal show={show} onHide={handleCloseTop}>
-                <Modal.Header closeButton>
-                    <Modal.Title className='text-white'>Wanderlog</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Row>
-                        <Col sm={12} md={6}>
-                            <label htmlFor="profile">
-                                <input id='profile' type="file" onChange={(e) => setWanderlogValue({ ...wanderlogValue, wanderlogImage: e.target.files[0] })} style={{ display: 'none' }} />
-                                <img height={'200rem'} width={'200rem'} className='rounded ' src={changeImg ? changeImg : `${baseUrl}/uploads/${wanderlogs.wanderlogImage}`} alt="" />
-                            </label>
-                        </Col>
-                        <Col sm={12} md={6}>
-                            <input type="text" value={wanderlogValue.place} onChange={(e) => setWanderlogValue({ ...wanderlogValue, place: e.target.value })} placeholder='Place' className='form-control w-100 mb-2 bg-light ' />
-                            <input type="date" value={wanderlogValue.date} onChange={(e) => setWanderlogValue({ ...wanderlogValue, date: e.target.value })} placeholder='date' className='form-control w-100 mb-2 bg-light' />
-
-                            <textarea value={wanderlogValue.wanderlog} onChange={(e) => setWanderlogValue({ ...wanderlogValue, wanderlog: e.target.value })} name="" id="" cols="24" rows="5" className='form-control bg-light' placeholder='write a wanderlog '></textarea>
-
-                        </Col>
-                    </Row>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="light" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="success" onClick={updateWanderlog}>
-                        Update
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+         
+            
+                <Button variant="success" onClick={handleShow} className='text-light rounded' ><i class="fa-solid fa-pen-to-square"></i></Button>
+                <Modal show={show} onHide={handleCloseTop}>
+                    <Modal.Header closeButton>
+                        <Modal.Title className='text-white'>Wanderlog</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row>
+                            <Col sm={12} md={6}>
+                                <label htmlFor="profile">
+                                    <input id='profile' type="file" onChange={(e) => setWanderlogValue({ ...wanderlogValue, wanderlogImage: e.target.files[0] })} style={{ display: 'none' }} />
+                                    <img height={'200rem'} width={'200rem'} className='rounded ' src={changeImg ? changeImg : `${baseUrl}/uploads/${wanderlogs.wanderlogImage}`} alt="" />
+                                </label>
+                            </Col>
+                            <Col sm={12} md={6}>
+                                <input type="text" value={wanderlogValue.place} onChange={(e) => setWanderlogValue({ ...wanderlogValue, place: e.target.value })} placeholder='Place' className='form-control w-100 mb-2 bg-light ' />
+                                <input type="date" value={wanderlogValue.date} onChange={(e) => setWanderlogValue({ ...wanderlogValue, date: e.target.value })} placeholder='date' className='form-control w-100 mb-2 bg-light' />
+    
+                                <textarea value={wanderlogValue.wanderlog} onChange={(e) => setWanderlogValue({ ...wanderlogValue, wanderlog: e.target.value })} name="" id="" cols="24" rows="5" className='form-control bg-light' placeholder='write a wanderlog '></textarea>
+    
+                            </Col>
+                        </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="light" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="success" onClick={updateWanderlog}>
+                            Update
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+         
             <ToastContainer theme='colored' position='top-center' autoClose={2000} />
-        </div>
+        </>
     )
 }
 
